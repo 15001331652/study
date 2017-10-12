@@ -8,6 +8,8 @@ public class SelectionSort extends Sort {
     /**
      * 选择排序
      * 不稳定的，5 8 5 2 9
+     * 交换少了，比较多了
+     * 综合来说比选择好
      * @param elements
      */
     public static void sort(int[] elements) {
@@ -24,7 +26,7 @@ public class SelectionSort extends Sort {
     }
 
     public static void main(String[] args) {
-        int[] array = {1, 2, 3, 4, 6, 0, 9, 100, 78, 93, 88, 88, 51};
+        int[] array = {1, 2, 2, 3, 4, 6, 0, 9, 100, 78, 93, 88, 66, 51};
         sort(array);
         printArray(array);
         System.out.println("swap : " + Sort.swapCount);
