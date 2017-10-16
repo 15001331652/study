@@ -8,7 +8,7 @@
     </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
-            <PatternLayout pattern="[%d{ISO8601}] | %p | %l | %t | %X{mdc1} | %X{mdc2} | %m%n"/>
+            <PatternLayout pattern="[%d{ISO8601}] | %p | %l | %t | %X{mdc1} | %m%n"/>
         </Console>
 
         <RollingFile name="RollingFileDebug" fileName="${sys:log.path}/logs/${log.project}/debug.log"
