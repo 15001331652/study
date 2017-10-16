@@ -16,18 +16,17 @@ public class DirectInsertSort extends Sort {
      * @param elements
      */
     public static void sort(int[] elements) {
-       for(int i = 1 ;i<elements.length;i++){
-           if(elements[i] > elements[i-1]){
-               int tmp = elements[i];
-               int j = i -1;
-               for(j = i - 1;elements[j] > tmp&&j >= 0;j--){
-                    elements[j+1]=elements[j];
-               }
-               elements[j+1] = tmp;
-           }
-       }
+        for (int i = 1; i < elements.length; i++) {
+            if (elements[i] > elements[i - 1]) {
+                int tmp = elements[i];
+                int j = i - 1;
+                for (j = i - 1;  j >= 0&&elements[j] < tmp ; j--) {
+                    elements[j + 1] = elements[j];
+                }
+                elements[j + 1] = tmp;
+            }
+        }
     }
-
 
     /**
      * 选择排序，再写一次
@@ -51,8 +50,8 @@ public class DirectInsertSort extends Sort {
         boolean flag = false;
         for (int i = 0; i < elements.length && flag == false; i++) {
             flag = true;
-            for (int j = elements.length - 2; j >= i ; j--) {
-                if (elements[j] < elements[j+1]) {
+            for (int j = elements.length - 2; j >= i; j--) {
+                if (elements[j] < elements[j + 1]) {
                     flag = false;
                     swap(elements, j, j + 1);
                 }
