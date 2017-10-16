@@ -11,7 +11,6 @@ import java.util.HashMap;
 public class LogTest {
     public static Logger logger = LogManager.getLogger(LogTest.class.getName());
 
-
     public static void main(String[] args) {
         test();
     }
