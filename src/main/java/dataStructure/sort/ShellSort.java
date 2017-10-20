@@ -14,33 +14,27 @@ public class ShellSort extends Sort {
      * @param elements
      */
     public static void sort(int[] elements) {
-        int j = 0;
-        int temp = 0;
-        for (int increment = elements.length / 2; increment > 0; increment /= 2) {
+        for (int increment = elements.length / 2; increment > 0; increment = increment / 2) {
             for (int i = increment; i < elements.length; i++) {
-                temp = elements[i];
-                for (j = i - increment; j >= 0; j -= increment) {
-                    if (temp < elements[j]) {
+                if (elements[i] < elements[i - increment]) {
+                    int tmp = elements[i];
+                    int j;
+                    for (j = i - increment; j >= 0 && elements[j] > tmp; j -= increment) {
                         elements[j + increment] = elements[j];
-                    } else {
-                        break;
                     }
+                    elements[j + increment] = tmp;
                 }
-                elements[j + increment] = temp;
             }
         }
     }
 
-//    public static void Test(int[] elements) {
-//        for (int increment = elements.length / 2; increment > 0; increment = elements.length / 2) {
-//            for (int i = increment; i < elements.length; i++) {
-//                if (elements[])
-//            }
-//        }
-//    }
+
+    public static void addSort(int[] elements, int increment) {
+
+    }
 
     public static void main(String[] args) {
-        int[] array = {26, 53, 67, 48, 57, 13, 48, 32, 60, 50};
+        int[] array = {26, 53, 67, 200, 57, 13, 100, 32, 60};
         sort(array);
         printArray(array);
 //        System.out.println("swap : " + Sort.swapCount);
