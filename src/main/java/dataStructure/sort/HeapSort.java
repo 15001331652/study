@@ -1,5 +1,7 @@
 package dataStructure.sort;
 
+import java.util.Arrays;
+
 /**
  * Created by renzengtao on 2017/10/20.
  */
@@ -10,65 +12,42 @@ public class HeapSort extends Sort{
      * @param elements
      */
     public static void sort(int[] elements) {
-        // 将待排序的序列构建成一个大顶堆
-        for (int i = elements.length / 2; i >= 0; i--){
-            heapAdjust(elements, i, elements.length);
+        int i;
+        for (i = elements.length / 2 - 1; i >= 0; i--) {// 构建一个大顶堆
+            adjustHeap(elements, i, elements.length - 1);
         }
-
-        // 逐步将每个最大值的根节点与末尾元素交换，并且再调整二叉树，使其成为大顶堆
-        for (int i = elements.length - 1; i > 0; i--) {
-            swap(elements, 0, i); // 将堆顶记录和当前未经排序子序列的最后一个记录交换
-            heapAdjust(elements, 0, i); // 交换之后，需要重新检查堆是否符合大顶堆，不符合则要调整
-        }
+//      for (i = elements.length - 1; i >= 0; i--) {// 将堆顶记录和当前未经排序子序列的最后一个记录交换
+//          int temp = elements[0];
+//          elements[0] = elements[i];
+//          elements[i] = temp;
+//          adjustHeap(elements, 0, i - 1);// 将a中前i-1个记录重新调整为大顶堆
+//      }
     }
 
     /**
-     * 构建堆的过程
-     * @param elements 需要排序的数组
-     * @param i 需要构建堆的根节点的序号
-     * @param n 数组的长度
+     * 构建大顶堆
      */
-    private static void heapAdjust(int[] elements, int i, int n) {
-        int child;
-        int father;
-        for (father = elements[i]; leftChild(i) < n; i = child) {
-            child = leftChild(i);
-
-            // 如果左子树小于右子树，则需要比较右子树和父节点
-            if (child != n - 1 && elements[child] < elements[child + 1]) {
-                child++; // 序号增1，指向右子树
-            }
-
-            // 如果父节点小于孩子结点，则需要交换
-            if (father < elements[child]) {
-                elements[i] = elements[child];
-            } else {
-                break; // 大顶堆结构未被破坏，不需要调整
-            }
+    public static void adjustHeap(int[] elements, int i, int len) {
+        int temp, j;
+        temp = elements[i];
+        for (j = 2 * i; j < len; j *= 2) {
+            //比较孩子节点，找出最大值
+            if (elements[j] < elements[j + 1])
+                //j记录值较大的下标
+                ++j;
+            if (temp >= elements[j])
+                break;
+            elements[i] = elements[j];
+            i = j;
         }
-        elements[i] = father;
+        elements[i] = temp;
     }
 
-    // 获取到左孩子结点
-    private static int leftChild(int i) {
-        return 2 * i + 1;
-    }
 
     public static void main(String[] args) {
-        int[] arr = { 50, 10, 90, 30, 70, 40, 80, 60, 20 };
-        System.out.println("排序之前：");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
-
-        // 堆排序
-        sort(arr);
-
-        System.out.println();
-        System.out.println("排序之后：");
-        for (int i = 0; i < arr.length; i++) {
-            System.out.print(arr[i] + " ");
-        }
+        int elements[] = { 40,50,30,100,10,20,99};
+        sort(elements);
+        System.out.println(Arrays.toString(elements));
     }
 
 
