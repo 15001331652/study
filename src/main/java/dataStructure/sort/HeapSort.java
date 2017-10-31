@@ -1,54 +1,80 @@
 package dataStructure.sort;
 
-import java.util.Arrays;
-
 /**
  * Created by renzengtao on 2017/10/20.
  */
-public class HeapSort extends Sort{
-    /**
-     * 堆排序
-     * 不稳定
-     * @param elements
-     */
-    public static void sort(int[] elements) {
-        int i;
-        for (i = elements.length / 2 - 1; i >= 0; i--) {// 构建一个大顶堆
-            adjustHeap(elements, i, elements.length - 1);
-        }
-//      for (i = elements.length - 1; i >= 0; i--) {// 将堆顶记录和当前未经排序子序列的最后一个记录交换
-//          int temp = elements[0];
-//          elements[0] = elements[i];
-//          elements[i] = temp;
-//          adjustHeap(elements, 0, i - 1);// 将a中前i-1个记录重新调整为大顶堆
-//      }
-    }
-
-    /**
-     * 构建大顶堆
-     */
-    public static void adjustHeap(int[] elements, int i, int len) {
-        int temp, j;
-        temp = elements[i];
-        for (j = 2 * i; j < len; j *= 2) {
-            //比较孩子节点，找出最大值
-            if (elements[j] < elements[j + 1])
-                //j记录值较大的下标
-                ++j;
-            if (temp >= elements[j])
-                break;
-            elements[i] = elements[j];
-            i = j;
-        }
-        elements[i] = temp;
-    }
-
-
+public class HeapSort{
+    static int N = 0;
     public static void main(String[] args) {
-        int elements[] = { 40,50,30,100,10,20,99};
-        sort(elements);
-        System.out.println(Arrays.toString(elements));
+        int array[]={5,1,3,11,2,6,7,8,4,9,10,12};
+        N = array.length;
+        printArray(array);
+        buildHeap(array);
+
+        sort(array);
     }
 
+    private static void sort(int[] array) {
+        System.out.println("开始排序...");
+        for(int i=N-1;i>=1;i--){
+            exch(array,0,i);//交换根元素和尾元素
+            adjustHeap(array,i,0);
+        }
+        System.out.println("排序完毕！结果如下：");
+        printArray(array);
+    }
+
+    private static void buildHeap(int[] array) {
+        System.out.println("开始构建堆...");
+        //构建堆
+        for(int i=(array.length-1)/2;i>=0;i--){
+            //从最后一颗子树开始
+            adjustHeap(array,array.length,i);
+        }
+        System.out.println("堆构建完毕！结果如下：");
+        printArray(array);
+    }
+
+    private static void printArray(int[] array) {
+        for(int n:array){
+            System.out.print(n+",");
+        }
+        System.out.println("");
+    }
+
+    /**
+     * Parent = (k-1)/2
+     * Left = 2i+1;
+     * Right = 2i+2;
+     * @param a 数组
+     * @param k 下标
+     */
+    private static void adjustHeap(int[] a,int length,int k){
+        while(2*k+1 < length ){
+            int left = 2*k+1;
+            int max = left;
+            if(left + 1 < length){
+                int right = left+1;
+
+                if(a[left]<a[right]){
+                    max = right;
+                }
+            }
+            if(a[max]<a[k]){
+                break;
+            }
+            exch(a,k,max);
+            printArray(a);
+            k = max;
+        }
+
+    }
+
+
+    private static void exch(int[] a,int i,int j){
+        int tmp = a[i];
+        a[i] = a[j];
+        a[j] = tmp;
+    }
 
 }
