@@ -3,78 +3,51 @@ package dataStructure.sort;
 /**
  * Created by renzengtao on 2017/10/20.
  */
-public class HeapSort{
-    static int N = 0;
-    public static void main(String[] args) {
-        int array[]={5,1,3,11,2,6,7,8,4,9,10,12};
-        N = array.length;
-        printArray(array);
-        buildHeap(array);
+public class HeapSort extends Sort{
+    
+    public static void sort(int[] elements) {
+        //初始化堆
+        for (int i = elements.length / 2 - 1; i >= 0; i--) {
+            heapAdjust(elements, elements.length, i);
 
-        sort(array);
-    }
-
-    private static void sort(int[] array) {
-        System.out.println("开始排序...");
-        for(int i=N-1;i>=1;i--){
-            exch(array,0,i);//交换根元素和尾元素
-            adjustHeap(array,i,0);
         }
-        System.out.println("排序完毕！结果如下：");
-        printArray(array);
-    }
-
-    private static void buildHeap(int[] array) {
-        System.out.println("开始构建堆...");
-        //构建堆
-        for(int i=(array.length-1)/2;i>=0;i--){
-            //从最后一颗子树开始
-            adjustHeap(array,array.length,i);
+        //把堆上的第一个元素放数组的最后，最后放到第一个
+        //通过长度的调节把最后一个干掉
+        //从新再调整堆，因为除了顶部节点，都满足条件，所有只需要从头调整就好了
+        for (int length = elements.length - 1; length >= 1; length--) {
+            swap(elements,length,0);
+            heapAdjust(elements, length, 0);
         }
-        System.out.println("堆构建完毕！结果如下：");
-        printArray(array);
-    }
 
-    private static void printArray(int[] array) {
-        for(int n:array){
-            System.out.print(n+",");
-        }
-        System.out.println("");
     }
 
     /**
-     * Parent = (k-1)/2
-     * Left = 2i+1;
-     * Right = 2i+2;
-     * @param a 数组
-     * @param k 下标
+     * 调整堆
+     * @param elements
+     * @param length
+     * @param k
      */
-    private static void adjustHeap(int[] a,int length,int k){
-        while(2*k+1 < length ){
-            int left = 2*k+1;
-            int max = left;
-            if(left + 1 < length){
-                int right = left+1;
-
-                if(a[left]<a[right]){
-                    max = right;
-                }
+    public static void heapAdjust(int[] elements, int length, int k) {
+        while ((k * 2) + 1 < length) {
+            //先把左节小标点赋值给最大值
+            int max = (k * 2) + 1;
+            //如果右节点小标的值大于左节点的值，那么就把最大值给右节点
+            if ((k * 2) + 2 < length && elements[(k * 2) + 2] > elements[(k * 2) + 1]) {
+                max = (k * 2) + 2;
             }
-            if(a[max]<a[k]){
+            if (elements[k] > elements[max]) {
                 break;
             }
-            exch(a,k,max);
-            printArray(a);
+            swap(elements, max, k);
+            //如果经过交换了，那么可能影响交换过的节点下面的节点，所有要接着循环或递归
             k = max;
         }
-
     }
 
-
-    private static void exch(int[] a,int i,int j){
-        int tmp = a[i];
-        a[i] = a[j];
-        a[j] = tmp;
+    public static void main(String[] args) {
+        int[] elements = {1, 5, 0, 99, 100, 87,1111,222,33};
+        sort(elements);
+        printArray(elements);
     }
 
 }
