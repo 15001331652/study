@@ -4,7 +4,7 @@ package dataStructure.sort;
  * Created by renzengtao on 2017/10/20.
  */
 public class HeapSort extends Sort{
-    
+
     public static void sort(int[] elements) {
         //初始化堆
         for (int i = elements.length / 2 - 1; i >= 0; i--) {
