@@ -13,6 +13,8 @@ public class MergeSort {
         int j = mid + 1;// 右指针
         int k = 0;
         // 把较小的数先移到新数组中
+        //1 3 5 7
+        //2 4 6 8
         while (i <= mid && j <= high) {
             if (a[i] < a[j]) {
                 temp[k++] = a[i++];
