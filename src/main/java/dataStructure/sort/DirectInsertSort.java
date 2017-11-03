@@ -20,7 +20,7 @@ public class DirectInsertSort extends Sort {
             if (elements[i] > elements[i - 1]) {
                 int tmp = elements[i];
                 int j = i - 1;
-                for (j = i - 1;  j >= 0&&elements[j] < tmp ; j--) {
+                for (j = i - 1; j >= 0 && elements[j] < tmp; j--) {
                     elements[j + 1] = elements[j];
                 }
                 elements[j + 1] = tmp;
@@ -45,7 +45,10 @@ public class DirectInsertSort extends Sort {
         }
     }
 
-
+    /**
+     * 冒泡排序，在写一次
+     * @param elements
+     */
     public static void bubbleSort(int[] elements) {
         boolean flag = false;
         for (int i = 0; i < elements.length && flag == false; i++) {

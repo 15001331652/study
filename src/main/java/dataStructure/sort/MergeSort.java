@@ -1,85 +1,59 @@
 package dataStructure.sort;
 
+import java.util.Arrays;
+
 /**
  * Created by renzengtao on 2017/11/3.
  */
 public class MergeSort {
 
-    public static void main(String[] args) {
-        int[] data = new int[] { 5, 3, 6, 2, 1, 9, 4, 8, 7 };
-        print(data);
-        mergeSort(data);
-        System.out.println("排序后的数组：");
-        print(data);
-    }
-
-    public static void mergeSort(int[] data) {
-        sort(data, 0, data.length - 1);
-    }
-
-    public static void sort(int[] data, int left, int right) {
-        if (left >= right)
-            return;
-        // 找出中间索引
-        int center = (left + right) / 2;
-        // 对左边数组进行递归
-        sort(data, left, center);
-        // 对右边数组进行递归
-        sort(data, center + 1, right);
-        // 合并
-        merge(data, left, center, right);
-        print(data);
-    }
-
-    /**
-     * 将两个数组进行归并，归并前面2个数组已有序，归并后依然有序
-     *
-     * @param data
-     *            数组对象
-     * @param left
-     *            左数组的第一个元素的索引
-     * @param center
-     *            左数组的最后一个元素的索引，center+1是右数组第一个元素的索引
-     * @param right
-     *            右数组最后一个元素的索引
-     */
-    public static void merge(int[] data, int left, int center, int right) {
-        // 临时数组
-        int[] tmpArr = new int[data.length];
-        // 右数组第一个元素索引
-        int mid = center + 1;
-        // third 记录临时数组的索引
-        int third = left;
-        // 缓存左数组第一个元素的索引
-        int tmp = left;
-        while (left <= center && mid <= right) {
-            // 从两个数组中取出最小的放入临时数组
-            if (data[left] <= data[mid]) {
-                tmpArr[third++] = data[left++];
+    public static void merge(int[] a, int low, int mid, int high) {
+        int[] temp = new int[high - low + 1];
+        int i = low;// 左指针
+        int j = mid + 1;// 右指针
+        int k = 0;
+        // 把较小的数先移到新数组中
+        while (i <= mid && j <= high) {
+            if (a[i] < a[j]) {
+                temp[k++] = a[i++];
             } else {
-                tmpArr[third++] = data[mid++];
+                temp[k++] = a[j++];
             }
         }
-        // 剩余部分依次放入临时数组（实际上两个while只会执行其中一个）
-        while (mid <= right) {
-            tmpArr[third++] = data[mid++];
+        // 把左边剩余的数移入数组
+        while (i <= mid) {
+            temp[k++] = a[i++];
         }
-        while (left <= center) {
-            tmpArr[third++] = data[left++];
+        // 把右边边剩余的数移入数组
+        while (j <= high) {
+            temp[k++] = a[j++];
         }
-        // 将临时数组中的内容拷贝回原数组中
-        // （原left-right范围的内容被复制回原数组）
-        while (tmp <= right) {
-            data[tmp] = tmpArr[tmp++];
+        // 把新数组中的数覆盖nums数组
+        for (int k2 = 0; k2 < temp.length; k2++) {
+            a[k2 + low] = temp[k2];
         }
     }
 
-    public static void print(int[] data) {
-        for (int i = 0; i < data.length; i++) {
-            System.out.print(data[i] + "\t");
+    public static void mergeSort(int[] a, int low, int high) {
+        int mid = (low + high) / 2;
+        if (low < high) {
+            // 左边
+            mergeSort(a, low, mid);
+            // 右边
+            mergeSort(a, mid + 1, high);
+            // 左右归并
+            merge(a, low, mid, high);
+            System.out.println(Arrays.toString(a));
         }
-        System.out.println();
     }
 
-
+    public static void main(String[] args) {
+        //0,1,2,3,4,5,6,7,8,9
+        int a[] = {1,3,5,7,
+                   2,4,6,8};
+        merge(a,0,3,7);
+        //mergeSort(a, 0, a.length - 1);
+        System.out.println("排序结果：" + Arrays.toString(a));
+    }
 }
+
