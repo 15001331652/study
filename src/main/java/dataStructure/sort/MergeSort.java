@@ -15,15 +15,6 @@ public class MergeSort {
         // 把较小的数先移到新数组中
         //1 3 5 7
         //2 4 6 8
-        /**
-         *      while(i<a.length && j<b.length)
-         14                 if(a[i] <= b[j]) {
-         15                     result[k++] = a[i++];
-         16                 }else{
-         17                     result[k++] = b[j++];
-         18                 }
-         */
-
         while (i <= mid && j <= high) {
             if (a[i] < a[j]) {
                 temp[k++] = a[i++];
@@ -62,8 +53,8 @@ public class MergeSort {
         //0,1,2,3,4,5,6,7,8,9
         int a[] = {1,3,5,7,
                    2,4,6,8};
-        merge(a,0,3,7);
-        //mergeSort(a, 0, a.length - 1);
+        //merge(a,0,3,7);
+        mergeSort(a, 0, a.length - 1);
         System.out.println("排序结果：" + Arrays.toString(a));
     }
 }
