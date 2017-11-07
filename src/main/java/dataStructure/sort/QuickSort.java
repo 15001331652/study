@@ -34,7 +34,7 @@ public class QuickSort extends Sort {
     }
 
     public static void main(String[] args) {
-        int a[] = {5,1,3,8,9};
+        int a[] = {5,1,2,3,4};
         sort(a);
         printArray(a);
     }
