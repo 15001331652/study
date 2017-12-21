@@ -26,6 +26,10 @@ public class FloatTest {
                 + (byte) ((b >> 1) & 0x1) + (byte) ((b >> 0) & 0x1);
     }
 
+    /**
+     * 如果不判断相等就是直接比较就可以，如果要判断相等就做减法，如果结果在一个合理误差范围内就认为是相等的.
+     * @param args
+     */
     public static void main(String[] args) {
 //        byte b = 1;
 //        // 输出 [0, 0, 1, 1, 0, 1, 0, 1]
@@ -37,9 +41,19 @@ public class FloatTest {
 
 //        byte b1 = 3<<1; // 0011 0101
 //        System.out.println(byteToBit(b1));
-        System.out.println(Long.toBinaryString(-1));
-        System.out.println(Long.toBinaryString(-1>>100000));
-        //System.out.println(Integer.toBinaryString(x<<1));
+//        System.out.println(Long.toBinaryString(-1));
+//        System.out.println(Long.toBinaryString(-1>>100000));
+//        //System.out.println(Integer.toBinaryString(x<<1));
+
+        float a = 10.222222225f;
+        float b = 10.222222229f;
+        float c = 0.000000000000009f;
+        System.out.println(Math.abs(a - b));
+        System.out.println("-------使用“==”符号比较是否相等：" + (a == b));
+        System.out.println("-------使用“Math.abs()”方法比较是否相等：" + (Math.abs(a - b) > 0));
+        System.out.println("-------使用“Math.abs()”方法比较是否相等(比较宽容的限制)：" + (Math.abs(a - b) < 0.00000001));
+        System.out.println("-------比较大小“<”：" + (a < b));
+        System.out.println("-------比较大小“>”：" + (a > b));
 
     }
 }

@@ -1,4 +1,4 @@
-package dataStructure.mock;
+package dataStructure.leetcode;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -7,7 +7,7 @@ import java.util.Map;
 /**
  * Created by renzengtao on 2017/12/18.
  */
-public class TwoSum {
+public class l_1_TwoSum {
     public static int[] twoSum(int[] nums, int target) {
         Map<Integer, Integer> map = new HashMap<Integer, Integer>();
         int[] returnArray = new int[2];

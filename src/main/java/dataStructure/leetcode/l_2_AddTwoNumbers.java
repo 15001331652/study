@@ -1,4 +1,4 @@
-package dataStructure.mock;
+package dataStructure.leetcode;
 
 /**
  * Created by renzengtao on 2017/12/18.
@@ -14,7 +14,7 @@ import java.util.LinkedList;
  Explanation: 342 + 465 = 807.
  其实就是每个位一直加，然后尾差，注解进位和其中一个遍历完的场景
  */
-public class AddTwoNumbers {
+public class l_2_AddTwoNumbers {
 
 
     static class LinkedNode<T>{
